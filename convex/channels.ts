@@ -1,105 +1,133 @@
-import { query, mutation } from "./_generated/server";
-import { v } from "convex/values";
+/**
+ * Channel Management Functions
+ */
 
-// Get all channels
+import { v } from 'convex/values';
+import { mutation, query } from './_generated/server';
+
+/**
+ * List all channels
+ */
 export const list = query({
     args: {},
     handler: async (ctx) => {
-        return await ctx.db.query("channels").collect();
+        return ctx.db.query('channels').order('desc').collect();
     },
 });
 
-// Get a single channel
+/**
+ * Get a channel by ID
+ */
 export const get = query({
-    args: { channelId: v.id("channels") },
+    args: { id: v.id('channels') },
     handler: async (ctx, args) => {
-        return await ctx.db.get(args.channelId);
+        return ctx.db.get(args.id);
     },
 });
 
-// Get channels by type
+/**
+ * Get channels by type
+ */
 export const getByType = query({
-    args: { type: v.string() },
+    args: {
+        type: v.union(
+            v.literal('telegram'),
+            v.literal('discord'),
+            v.literal('whatsapp'),
+            v.literal('imessage')
+        ),
+    },
     handler: async (ctx, args) => {
-        return await ctx.db
-            .query("channels")
-            .withIndex("by_type", (q) => q.eq("type", args.type as any))
+        return ctx.db
+            .query('channels')
+            .withIndex('by_type', (q) => q.eq('type', args.type))
             .collect();
     },
 });
 
-// Create or update a channel (upsert by name + type)
-export const upsert = mutation({
+/**
+ * Create a new channel
+ */
+export const create = mutation({
     args: {
-        name: v.string(),
         type: v.union(
-            v.literal("telegram"),
-            v.literal("discord"),
-            v.literal("whatsapp"),
-            v.literal("imessage")
+            v.literal('telegram'),
+            v.literal('discord'),
+            v.literal('whatsapp'),
+            v.literal('imessage')
         ),
-        status: v.union(
-            v.literal("connected"),
-            v.literal("disconnected"),
-            v.literal("connecting"),
-            v.literal("error")
-        ),
-        lastConnectedAt: v.optional(v.number()),
-        lastError: v.optional(v.string()),
+        name: v.string(),
+        credentials: v.optional(v.string()),
         metadata: v.optional(v.any()),
     },
     handler: async (ctx, args) => {
-        // Check if channel already exists
-        const existing = await ctx.db
-            .query("channels")
-            .filter((q) =>
-                q.and(q.eq(q.field("name"), args.name), q.eq(q.field("type"), args.type))
-            )
-            .first();
+        const now = Date.now();
 
-        if (existing) {
-            await ctx.db.patch(existing._id, {
-                status: args.status,
-                lastConnectedAt: args.lastConnectedAt,
-                lastError: args.lastError,
-                metadata: args.metadata,
-            });
-            return existing._id;
-        }
-
-        return await ctx.db.insert("channels", args);
+        return ctx.db.insert('channels', {
+            type: args.type,
+            name: args.name,
+            enabled: true,
+            credentials: args.credentials,
+            metadata: args.metadata,
+            status: 'disconnected',
+            createdAt: now,
+            updatedAt: now,
+        });
     },
 });
 
-// Update channel status
+/**
+ * Update a channel
+ */
+export const update = mutation({
+    args: {
+        id: v.id('channels'),
+        name: v.optional(v.string()),
+        enabled: v.optional(v.boolean()),
+        credentials: v.optional(v.string()),
+        metadata: v.optional(v.any()),
+    },
+    handler: async (ctx, args) => {
+        const { id, ...updates } = args;
+
+        await ctx.db.patch(id, {
+            ...updates,
+            updatedAt: Date.now(),
+        });
+    },
+});
+
+/**
+ * Update channel status
+ */
 export const updateStatus = mutation({
     args: {
-        channelId: v.id("channels"),
+        id: v.id('channels'),
         status: v.union(
-            v.literal("connected"),
-            v.literal("disconnected"),
-            v.literal("connecting"),
-            v.literal("error")
+            v.literal('connected'),
+            v.literal('disconnected'),
+            v.literal('error')
         ),
-        lastError: v.optional(v.string()),
+        error: v.optional(v.string()),
     },
     handler: async (ctx, args) => {
-        const updates: any = { status: args.status };
-        if (args.status === "connected") {
-            updates.lastConnectedAt = Date.now();
-            updates.lastError = undefined;
-        }
-        if (args.lastError) {
-            updates.lastError = args.lastError;
-        }
-        await ctx.db.patch(args.channelId, updates);
+        const now = Date.now();
+
+        await ctx.db.patch(args.id, {
+            status: args.status,
+            lastConnectedAt: args.status === 'connected' ? now : undefined,
+            lastError: args.error,
+            updatedAt: now,
+        });
     },
 });
 
-// Delete a channel
+/**
+ * Delete a channel
+ */
 export const remove = mutation({
-    args: { channelId: v.id("channels") },
+    args: { id: v.id('channels') },
     handler: async (ctx, args) => {
-        await ctx.db.delete(args.channelId);
+        await ctx.db.delete(args.id);
     },
 });
