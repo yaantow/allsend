@@ -10,68 +10,15 @@ import {
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
-// Demo data fallback when Convex is not connected
-const demoChannels = [
-    { _id: '1' as any, name: 'Production Bot', type: 'telegram', status: 'connected' },
-    { _id: '2' as any, name: 'Community Server', type: 'discord', status: 'connected' },
-    { _id: '3' as any, name: 'Support Line', type: 'whatsapp', status: 'disconnected' },
-    { _id: '4' as any, name: 'Personal iMessage', type: 'imessage', status: 'connected' },
-];
-
-const demoMessages = [
-    {
-        _id: '1' as any,
-        senderName: 'John Doe',
-        content: 'Hey, is the AI assistant working now?',
-        channelType: 'telegram',
-        timestamp: Date.now() - 1000 * 60 * 5,
-    },
-    {
-        _id: '2' as any,
-        senderName: 'Jane Smith',
-        content: 'Just tested the Discord integration, works great! 🎉',
-        channelType: 'discord',
-        timestamp: Date.now() - 1000 * 60 * 15,
-    },
-    {
-        _id: '3' as any,
-        senderName: 'Mike Johnson',
-        content: 'Can you check the WhatsApp connection?',
-        channelType: 'whatsapp',
-        timestamp: Date.now() - 1000 * 60 * 30,
-    },
-];
-
 export default function Dashboard() {
-    // Try to use Convex, fallback to demo data
-    let channels: typeof demoChannels;
-    let messages: typeof demoMessages;
-    let stats = { totalMessages: 0, todayMessages: 0, connectedChannels: 0, totalChannels: 0 };
-
-    try {
-        const convexChannels = useQuery(api.channels.list);
-        const convexMessages = useQuery(api.messages.list, { limit: 10 });
-        const convexStats = useQuery(api.messages.stats);
-
-        channels = convexChannels ?? demoChannels;
-        messages = convexMessages ?? demoMessages;
-        stats = convexStats ?? {
-            totalMessages: 12847,
-            todayMessages: 1234,
-            connectedChannels: demoChannels.filter(c => c.status === 'connected').length,
-            totalChannels: demoChannels.length,
-        };
-    } catch {
-        // Convex not available, use demo data
-        channels = demoChannels;
-        messages = demoMessages;
-        stats = {
-            totalMessages: 12847,
-            todayMessages: 1234,
-            connectedChannels: demoChannels.filter(c => c.status === 'connected').length,
-            totalChannels: demoChannels.length,
-        };
-    }
+    const channels = useQuery(api.channels.list) ?? [];
+    const messages = useQuery(api.messages.list, { limit: 10 }) ?? [];
+    const stats = useQuery(api.messages.stats) ?? {
+        totalMessages: 0,
+        todayMessages: 0,
+        connectedChannels: 0,
+        totalChannels: 0,
+    };
 
     return (
         <div className="fade-in">

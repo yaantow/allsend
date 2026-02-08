@@ -5,13 +5,6 @@ import { api } from '../../../../convex/_generated/api';
 import { ArrowLeft, Send, Image, Paperclip } from 'lucide-react';
 import { format } from 'date-fns';
 
-// Demo messages for fallback
-const demoMessages = [
-    { _id: '1', senderName: 'John', content: 'Hey there!', isOutgoing: false, timestamp: Date.now() - 1000 * 60 * 30 },
-    { _id: '2', senderName: 'You', content: 'Hi! How can I help?', isOutgoing: true, timestamp: Date.now() - 1000 * 60 * 25 },
-    { _id: '3', senderName: 'John', content: 'I have a question about the integration', isOutgoing: false, timestamp: Date.now() - 1000 * 60 * 20 },
-];
-
 export default function ConversationDetail() {
     const { conversationId } = useParams<{ conversationId: string }>();
     const navigate = useNavigate();
@@ -20,33 +13,21 @@ export default function ConversationDetail() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     // Get messages for this conversation
-    let messages: typeof demoMessages;
-    let conversationTitle = 'Conversation';
-    let channelType = 'telegram';
+    const convexMessages = useQuery(api.messages.getByConversation, {
+        conversationId: conversationId || '',
+        limit: 100,
+    });
 
-    try {
-        const convexMessages = useQuery(api.messages.getByConversation, {
-            conversationId: conversationId || '',
-            limit: 100,
-        });
+    const messages = convexMessages?.map(m => ({
+        _id: m._id,
+        senderName: m.senderName,
+        content: m.content,
+        isOutgoing: m.isOutgoing,
+        timestamp: m.timestamp,
+    })).reverse() ?? []; // Oldest first
 
-        if (convexMessages && convexMessages.length > 0) {
-            messages = convexMessages.map(m => ({
-                _id: m._id,
-                senderName: m.senderName,
-                content: m.content,
-                isOutgoing: m.isOutgoing,
-                timestamp: m.timestamp,
-            })).reverse(); // Oldest first
-
-            conversationTitle = convexMessages[0]?.senderName || 'Unknown';
-            channelType = convexMessages[0]?.channelType || 'telegram';
-        } else {
-            messages = demoMessages;
-        }
-    } catch {
-        messages = demoMessages;
-    }
+    const conversationTitle = convexMessages?.[0]?.senderName || 'Conversation';
+    const channelType = convexMessages?.[0]?.channelType || 'telegram';
 
     // Scroll to bottom when messages change
     useEffect(() => {

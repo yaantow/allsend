@@ -3,24 +3,8 @@ import { api } from '../../../../convex/_generated/api';
 import { Activity, Filter } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
-// Demo data fallback
-const demoEvents = [
-    { _id: '1' as any, type: 'message.received', channelType: 'telegram', timestamp: Date.now() - 1000 * 60 * 2 },
-    { _id: '2' as any, type: 'adapter.connected', channelType: 'discord', timestamp: Date.now() - 1000 * 60 * 5 },
-    { _id: '3' as any, type: 'message.sent', channelType: 'telegram', timestamp: Date.now() - 1000 * 60 * 10 },
-    { _id: '4' as any, type: 'reaction.added', channelType: 'discord', timestamp: Date.now() - 1000 * 60 * 15 },
-    { _id: '5' as any, type: 'adapter.disconnected', channelType: 'whatsapp', timestamp: Date.now() - 1000 * 60 * 30 },
-];
-
 export default function Events() {
-    let events: typeof demoEvents;
-
-    try {
-        const convexEvents = useQuery(api.events.list, { limit: 50 });
-        events = convexEvents ?? demoEvents;
-    } catch {
-        events = demoEvents;
-    }
+    const events = useQuery(api.events.list, { limit: 50 }) ?? [];
 
     return (
         <div className="fade-in">
