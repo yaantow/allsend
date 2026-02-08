@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # BridgeKit Hub Server
+  hub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - CONVEX_URL=${CONVEX_URL}
+      # Channel credentials (configure per your needs)
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+      - BLUEBUBBLES_URL=${BLUEBUBBLES_URL}
+      - BLUEBUBBLES_PASSWORD=${BLUEBUBBLES_PASSWORD}
+    volumes:
+      - ./config:/app/config
+      - whatsapp-session:/app/whatsapp-session
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Dashboard (Admin UI)
+  dashboard:
+    build:
+      context: ./apps/dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_CONVEX_URL=${CONVEX_URL}
+    depends_on:
+      - hub
+    restart: unless-stopped
+
+volumes:
+  whatsapp-session:
+    driver: local

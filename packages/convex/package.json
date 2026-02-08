@@ -1,0 +1,19 @@
+{
+    "name": "@bridgekit/convex",
+    "version": "0.1.0",
+    "description": "Convex backend for BridgeKit multi-channel hub",
+    "type": "module",
+    "scripts": {
+        "dev": "convex dev",
+        "deploy": "convex deploy",
+        "generate": "convex codegen"
+    },
+    "dependencies": {
+        "convex": "^1.17.0"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "typescript": "^5.3.3"
+    },
+    "license": "MIT"
+}

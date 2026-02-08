@@ -1,0 +1,36 @@
+{
+    "name": "@bridgekit/core",
+    "version": "0.1.0",
+    "description": "Core types and base adapter for BridgeKit multi-channel hub",
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc",
+        "test": "bun test",
+        "lint": "tsc --noEmit"
+    },
+    "dependencies": {
+        "eventemitter3": "^5.0.1"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "typescript": "^5.3.3"
+    },
+    "peerDependencies": {
+        "convex": "^1.0.0"
+    },
+    "peerDependenciesMeta": {
+        "convex": {
+            "optional": true
+        }
+    },
+    "license": "MIT"
+}

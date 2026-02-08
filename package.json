@@ -1,0 +1,37 @@
+{
+  "name": "bridgekit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open-source multi-channel communication hub for AI projects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/bridgekit"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "bun run build:core && bun run dev:dashboard",
+    "dev:api": "cd apps/api && bun run dev",
+    "dev:dashboard": "cd apps/dashboard && bun run dev",
+    "start:api": "cd apps/api && bun run start",
+    "build": "bun run build:core && bun run build:adapters",
+    "build:core": "cd packages/core && bun run build",
+    "build:adapters": "bun run --filter '@bridgekit/adapter-*' build",
+    "test": "bun run --filter '*' test",
+    "lint": "bun run --filter '*' lint",
+    "clean": "rm -rf packages/*/dist apps/*/dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "convex": "^1.31.7"
+  }
+}

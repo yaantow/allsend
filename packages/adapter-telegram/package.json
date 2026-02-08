@@ -1,0 +1,29 @@
+{
+    "name": "@bridgekit/adapter-telegram",
+    "version": "0.1.0",
+    "description": "Telegram adapter for BridgeKit multi-channel hub",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "dev": "bun build ./src/index.ts --outdir ./dist --target bun --watch",
+        "build": "bun build ./src/index.ts --outdir ./dist --target bun && tsc --emitDeclarationOnly",
+        "test": "bun test",
+        "lint": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@bridgekit/core": "workspace:*",
+        "grammy": "^1.21.1"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "typescript": "^5.3.3"
+    },
+    "license": "MIT"
+}
