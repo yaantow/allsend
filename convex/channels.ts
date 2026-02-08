@@ -106,6 +106,7 @@ export const updateStatus = mutation({
         status: v.union(
             v.literal('connected'),
             v.literal('disconnected'),
+            v.literal('connecting'),
             v.literal('error')
         ),
         error: v.optional(v.string()),

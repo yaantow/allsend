@@ -23,7 +23,7 @@ export const getByConversation = query({
             .order('desc');
 
         if (args.cursor) {
-            query = query.filter((q) => q.lt(q.field('timestamp'), args.cursor));
+            query = query.filter((q) => q.lt(q.field('timestamp'), args.cursor!));
         }
 
         return query.take(limit);

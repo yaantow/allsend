@@ -14,13 +14,14 @@ export const list = query({
         limit: v.optional(v.number()),
     },
     handler: async (ctx, args) => {
-        let query = ctx.db.query('conversations');
-
         if (args.channelId) {
-            query = query.withIndex('by_channel', (q) => q.eq('channelId', args.channelId));
+            return ctx.db.query('conversations')
+                .withIndex('by_channel', (q) => q.eq('channelId', args.channelId!))
+                .order('desc')
+                .take(args.limit ?? 50);
         }
 
-        return query
+        return ctx.db.query('conversations')
             .order('desc')
             .take(args.limit ?? 50);
     },

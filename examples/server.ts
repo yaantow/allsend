@@ -30,13 +30,29 @@ async function syncChannelToConvex(
 ) {
     if (!convex) return;
     try {
-        await convex.mutation(api.channels.upsert, {
-            name,
-            type,
-            status,
-            lastConnectedAt: status === 'connected' ? Date.now() : undefined,
-            lastError: error,
-        });
+        // 1. Check if channel exists
+        const channels = await convex.query(api.channels.getByType, { type });
+        const existing = channels.find((c: any) => c.name === name);
+
+        if (existing) {
+            // Update status
+            await convex.mutation(api.channels.updateStatus, {
+                id: existing._id,
+                status,
+                error,
+            });
+            // Update credentials if needed? (Not doing it here to allow dashboard control)
+        } else {
+            // Create new channel
+            await convex.mutation(api.channels.create, {
+                name,
+                type,
+                // We don't have credentials here in this direction usually, 
+                // but this example initializes FROM env vars.
+                // So we can store token if we want.
+                credentials: JSON.stringify({ token: process.env.TELEGRAM_BOT_TOKEN }),
+            });
+        }
     } catch (e) {
         console.error('Failed to sync channel to Convex:', e);
     }
@@ -56,18 +72,39 @@ async function storeMessageInConvex(
 ) {
     if (!convex) return;
     try {
-        await convex.mutation(api.messages.store, {
+        // 1. Ensure conversation exists
+        const convexConversationId = await convex.mutation(api.conversations.getOrCreate, {
             channelId,
             channelType,
-            platformMessageId,
-            conversationId,
-            senderName,
-            senderPlatformId,
-            content,
-            contentType,
-            isOutgoing,
-            timestamp: Date.now(),
+            platformConversationId: conversationId,
+            isGroup: false, // Defaulting
         });
+
+        if (!convexConversationId) return;
+
+        // 2. Store message
+        if (isOutgoing) {
+            await convex.mutation(api.messages.send, {
+                conversationId: convexConversationId,
+                channelType,
+                platformMessageId,
+                contentType,
+                content: { text: content },
+                timestamp: Date.now(),
+            });
+        } else {
+            await convex.mutation(api.messages.receive, {
+                conversationId: convexConversationId,
+                channelType,
+                platformMessageId,
+                senderId: senderPlatformId,
+                senderName,
+                isBot: false,
+                contentType,
+                content: { text: content, type: contentType },
+                timestamp: Date.now(),
+            } as any);
+        }
     } catch (e) {
         console.error('Failed to store message in Convex:', e);
     }
@@ -103,8 +140,9 @@ hub.on('adapter:connected', async (adapterId, channelType) => {
         if (convex) {
             try {
                 const channels = await convex.query(api.channels.getByType, { type: 'telegram' });
-                if (channels.length > 0) {
-                    telegramChannelId = channels[0]._id;
+                const channel = channels.find((c: any) => c.name === 'Main Telegram Bot');
+                if (channel) {
+                    telegramChannelId = channel._id;
                 }
             } catch (e) {
                 console.error('Failed to get channel ID:', e);
@@ -186,6 +224,7 @@ hub.on('event', async (event) => {
             await convex.mutation(api.events.log, {
                 type: event.type,
                 channelType: event.channelType,
+                payload: { ...event, type: undefined },
             });
         } catch (e) {
             // Silently ignore event logging errors
