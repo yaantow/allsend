@@ -1,5 +1,5 @@
 /**
- * BridgeKit Telegram Adapter
+ * Allsend Telegram Adapter
  * 
  * Integrates with Telegram Bot API using Grammy.
  * Supports both polling and webhook modes.
@@ -22,7 +22,7 @@ import {
     type FileContent,
     type LocationContent,
     type StickerContent,
-} from '@bridgekit/core';
+} from '@allsend/core';
 
 /**
  * Telegram-specific configuration
@@ -42,7 +42,7 @@ export interface TelegramConfig extends ChannelConfig {
 }
 
 /**
- * Telegram adapter for BridgeKit
+ * Telegram adapter for Allsend
  * 
  * @example
  * ```typescript

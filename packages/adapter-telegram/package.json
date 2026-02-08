@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/adapter-telegram",
+    "name": "@allsend/adapter-telegram",
     "version": "0.1.0",
-    "description": "Telegram adapter for BridgeKit multi-channel hub",
+    "description": "Telegram adapter for Allsend multi-channel hub",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,7 +18,7 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
-        "@bridgekit/core": "workspace:*",
+        "@allsend/core": "workspace:*",
         "grammy": "^1.21.1"
     },
     "devDependencies": {

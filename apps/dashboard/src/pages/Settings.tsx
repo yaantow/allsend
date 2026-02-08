@@ -7,7 +7,7 @@ export default function SettingsPage() {
                 <div className="page-title">
                     <h1>Settings</h1>
                     <p className="page-description">
-                        Configure your BridgeKit instance
+                        Configure your allsend instance
                     </p>
                 </div>
             </header>
@@ -24,9 +24,9 @@ export default function SettingsPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                         <SettingRow
                             label="Instance Name"
-                            description="A friendly name for your BridgeKit instance"
+                            description="A friendly name for your allsend instance"
                             type="text"
-                            value="My BridgeKit"
+                            value="My allsend"
                         />
                         <SettingRow
                             label="Timezone"

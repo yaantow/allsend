@@ -1,5 +1,5 @@
 /**
- * BridgeKit Core
+ * Allsend Core
  * 
  * Unified multi-channel messaging library
  */

@@ -1,6 +1,6 @@
 # Dashboard Setup
 
-The BridgeKit dashboard provides a real-time view of all your connected channels.
+The allsend dashboard provides a real-time view of all your connected channels.
 
 ## Features
 

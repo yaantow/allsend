@@ -1,11 +1,11 @@
 {
-  "name": "bridgekit",
+  "name": "allsend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Open-source multi-channel communication hub for AI projects",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/bridgekit"
+    "url": "https://github.com/yaantow/allsend"
   },
   "workspaces": [
     "packages/*",
@@ -18,7 +18,7 @@
     "start:api": "cd apps/api && bun run start",
     "build": "bun run build:core && bun run build:adapters",
     "build:core": "cd packages/core && bun run build",
-    "build:adapters": "bun run --filter '@bridgekit/adapter-*' build",
+    "build:adapters": "bun run --filter '@allsend/adapter-*' build",
     "test": "bun run --filter '*' test",
     "lint": "bun run --filter '*' lint",
     "clean": "rm -rf packages/*/dist apps/*/dist"

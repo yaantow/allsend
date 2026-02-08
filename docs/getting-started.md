@@ -1,6 +1,6 @@
-# Getting Started with BridgeKit
+# Getting Started with allsend
 
-Learn how to set up BridgeKit and create your first multi-channel bot.
+Learn how to set up allsend and create your first multi-channel bot.
 
 ## Prerequisites
 
@@ -12,14 +12,14 @@ Learn how to set up BridgeKit and create your first multi-channel bot.
 ### From npm (Coming Soon)
 
 ```bash
-bun add @bridgekit/core @bridgekit/adapter-telegram
+bun add @allsend/core @allsend/adapter-telegram
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/your-org/allsend.git
+cd allsend
 bun install
 bun run build
 ```
@@ -37,8 +37,8 @@ bun run build
 Create a file called `bot.ts`:
 
 ```typescript
-import { createHub } from '@bridgekit/core';
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
+import { createHub } from '@allsend/core';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
 
 const hub = createHub();
 
@@ -82,10 +82,10 @@ Now message your bot on Telegram - it should echo your messages!
 
 ## Adding More Channels
 
-BridgeKit makes it easy to support multiple platforms:
+allsend makes it easy to support multiple platforms:
 
 ```typescript
-import { DiscordAdapter } from '@bridgekit/adapter-discord';
+import { DiscordAdapter } from '@allsend/adapter-discord';
 
 // Add Discord alongside Telegram
 hub.registerAdapter(new DiscordAdapter({
@@ -103,11 +103,11 @@ Your message handler will now receive messages from both platforms!
 
 ## Understanding Messages
 
-Every message in BridgeKit follows a unified format:
+Every message in allsend follows a unified format:
 
 ```typescript
 interface Message {
-  id: string;                    // Unique BridgeKit ID
+  id: string;                    // Unique allsend ID
   platformMessageId: string;     // Original platform ID
   channelType: string;           // 'telegram', 'discord', etc.
   conversationId: string;        // Chat/Channel ID
@@ -169,6 +169,6 @@ hub.reply(message, {
 
 ## Next Steps
 
-- [Self-Hosting Guide](./self-hosting.md) - Deploy BridgeKit on your own server
+- [Self-Hosting Guide](./self-hosting.md) - Deploy allsend on your own server
 - [Adapter Reference](./adapters.md) - Detailed docs for each platform
 - [Dashboard Setup](./dashboard.md) - Set up the admin dashboard

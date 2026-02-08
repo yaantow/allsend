@@ -1,5 +1,5 @@
 /**
- * BridgeKit WhatsApp Adapter
+ * Allsend WhatsApp Adapter
  * 
  * Integrates with WhatsApp using whatsapp-web.js.
  * Requires QR code scanning for authentication.
@@ -19,7 +19,7 @@ import {
     type SendMessageOptions,
     type SendResult,
     type Conversation,
-} from '@bridgekit/core';
+} from '@allsend/core';
 
 /**
  * WhatsApp-specific configuration
@@ -37,7 +37,7 @@ export interface WhatsAppConfig extends ChannelConfig {
 }
 
 /**
- * WhatsApp adapter for BridgeKit
+ * WhatsApp adapter for Allsend
  * 
  * @example
  * ```typescript

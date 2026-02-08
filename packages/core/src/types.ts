@@ -1,8 +1,8 @@
 /**
- * BridgeKit Core Types
+ * Allsend Core Types
  * 
  * Unified message protocol that normalizes messages across all platforms.
- * These types are the foundation of BridgeKit's cross-platform abstraction.
+ * These types are the foundation of Allsend's cross-platform abstraction.
  */
 
 // =============================================================================
@@ -40,7 +40,7 @@ export interface ChannelConfig {
  * Unified user/sender representation across platforms
  */
 export interface UnifiedSender {
-    /** BridgeKit internal user ID */
+    /** Allsend internal user ID */
     id: string;
     /** Original platform-specific user ID */
     platformId: string;
@@ -211,11 +211,11 @@ export type MessageContent =
  * The core unified message type that represents any message from any platform
  */
 export interface UnifiedMessage {
-    /** BridgeKit internal message ID */
+    /** Allsend internal message ID */
     id: string;
     /** Platform this message originated from */
     channelType: ChannelType;
-    /** BridgeKit channel configuration ID */
+    /** Allsend channel configuration ID */
     channelId: string;
     /** Platform-specific message ID */
     platformMessageId: string;

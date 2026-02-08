@@ -1,5 +1,5 @@
 /**
- * BridgeKit Channel Hub
+ * Allsend Channel Hub
  * 
  * The main orchestrator that manages all platform adapters.
  * Provides a unified interface for sending messages and receiving events

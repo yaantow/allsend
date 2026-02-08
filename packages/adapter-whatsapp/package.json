@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/adapter-whatsapp",
+    "name": "@allsend/adapter-whatsapp",
     "version": "0.1.0",
-    "description": "WhatsApp adapter for BridgeKit multi-channel hub",
+    "description": "WhatsApp adapter for Allsend multi-channel hub",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,7 +18,7 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
-        "@bridgekit/core": "workspace:*",
+        "@allsend/core": "workspace:*",
         "whatsapp-web.js": "^1.23.0",
         "qrcode-terminal": "^0.12.0"
     },

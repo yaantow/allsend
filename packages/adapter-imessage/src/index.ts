@@ -1,5 +1,5 @@
 /**
- * BridgeKit iMessage Adapter
+ * Allsend iMessage Adapter
  * 
  * Integrates with iMessage via BlueBubbles server.
  * Requires a macOS machine running BlueBubbles server.
@@ -17,7 +17,7 @@ import {
     type SendMessageOptions,
     type SendResult,
     type Conversation,
-} from '@bridgekit/core';
+} from '@allsend/core';
 
 /**
  * iMessage/BlueBubbles-specific configuration
@@ -74,7 +74,7 @@ interface BBAttachment {
 }
 
 /**
- * iMessage adapter for BridgeKit via BlueBubbles
+ * iMessage adapter for Allsend via BlueBubbles
  * 
  * @example
  * ```typescript

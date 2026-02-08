@@ -1,6 +1,6 @@
 # Adapter Reference
 
-Detailed documentation for each BridgeKit adapter.
+Detailed documentation for each Allsend adapter.
 
 ---
 
@@ -11,13 +11,13 @@ Connect to Telegram using the official Bot API.
 ### Installation
 
 ```bash
-bun add @bridgekit/adapter-telegram
+bun add @allsend/adapter-telegram
 ```
 
 ### Configuration
 
 ```typescript
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
 
 const telegram = new TelegramAdapter({
   id: 'telegram-main',          // Unique adapter ID
@@ -86,13 +86,13 @@ Connect to Discord using Discord.js.
 ### Installation
 
 ```bash
-bun add @bridgekit/adapter-discord
+bun add @allsend/adapter-discord
 ```
 
 ### Configuration
 
 ```typescript
-import { DiscordAdapter } from '@bridgekit/adapter-discord';
+import { DiscordAdapter } from '@allsend/adapter-discord';
 
 const discord = new DiscordAdapter({
   id: 'discord-main',
@@ -156,13 +156,13 @@ Connect to WhatsApp using whatsapp-web.js.
 ### Installation
 
 ```bash
-bun add @bridgekit/adapter-whatsapp
+bun add @allsend/adapter-whatsapp
 ```
 
 ### Configuration
 
 ```typescript
-import { WhatsAppAdapter } from '@bridgekit/adapter-whatsapp';
+import { WhatsAppAdapter } from '@allsend/adapter-whatsapp';
 
 const whatsapp = new WhatsAppAdapter({
   id: 'whatsapp-main',
@@ -223,7 +223,7 @@ Connect to iMessage via BlueBubbles (macOS only).
 ### Configuration
 
 ```typescript
-import { iMessageAdapter } from '@bridgekit/adapter-imessage';
+import { iMessageAdapter } from '@allsend/adapter-imessage';
 
 const imessage = new iMessageAdapter({
   id: 'imessage-main',
@@ -274,7 +274,7 @@ hub.registerAdapter(imessage);
 You can create adapters for any platform:
 
 ```typescript
-import { BaseAdapter, AdapterConfig, UnifiedMessage } from '@bridgekit/core';
+import { BaseAdapter, AdapterConfig, UnifiedMessage } from '@allsend/core';
 
 class CustomAdapter extends BaseAdapter {
   constructor(config: AdapterConfig) {

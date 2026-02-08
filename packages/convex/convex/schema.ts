@@ -1,5 +1,5 @@
 /**
- * BridgeKit Convex Schema
+ * Allsend Convex Schema
  * 
  * Database schema for storing channels, messages, and events.
  */

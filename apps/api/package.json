@@ -1,5 +1,5 @@
 {
-    "name": "@bridgekit/api",
+    "name": "@allsend/api",
     "version": "0.1.0",
     "type": "module",
     "scripts": {
@@ -8,11 +8,11 @@
         "build": "echo 'No build needed for Bun runtime'"
     },
     "dependencies": {
-        "@bridgekit/core": "workspace:*",
-        "@bridgekit/adapter-telegram": "workspace:*",
-        "@bridgekit/adapter-discord": "workspace:*",
-        "@bridgekit/adapter-whatsapp": "workspace:*",
-        "@bridgekit/adapter-imessage": "workspace:*",
+        "@allsend/core": "workspace:*",
+        "@allsend/adapter-telegram": "workspace:*",
+        "@allsend/adapter-discord": "workspace:*",
+        "@allsend/adapter-whatsapp": "workspace:*",
+        "@allsend/adapter-imessage": "workspace:*",
         "convex": "^1.17.7"
     },
     "devDependencies": {

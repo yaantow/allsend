@@ -1,6 +1,6 @@
-# Self-Hosting BridgeKit
+# Self-Hosting allsend
 
-This guide covers deploying BridgeKit on your own infrastructure.
+This guide covers deploying allsend on your own infrastructure.
 
 ## Deployment Options
 
@@ -22,8 +22,8 @@ This guide covers deploying BridgeKit on your own infrastructure.
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/your-org/allsend.git
+cd allsend
 ```
 
 2. **Configure environment:**
@@ -89,15 +89,15 @@ services:
 curl -fsSL https://bun.sh/install | bash
 
 # Clone and install
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/your-org/allsend.git
+cd allsend
 bun install
 bun run build
 ```
 
 ### Step 2: Configure Environment
 
-Create `/etc/bridgekit/.env` or use your preferred location:
+Create `/etc/allsend/.env` or use your preferred location:
 
 ```bash
 # Bot Tokens
@@ -110,19 +110,19 @@ CONVEX_URL=https://your-project.convex.cloud
 
 ### Step 3: Create Systemd Service
 
-Create `/etc/systemd/system/bridgekit.service`:
+Create `/etc/systemd/system/allsend.service`:
 
 ```ini
 [Unit]
-Description=BridgeKit Server
+Description=allsend Server
 After=network.target
 
 [Service]
 Type=simple
-User=bridgekit
-WorkingDirectory=/opt/bridgekit
+User=allsend
+WorkingDirectory=/opt/allsend
 ExecStart=/usr/local/bin/bun run examples/server.ts
-EnvironmentFile=/etc/bridgekit/.env
+EnvironmentFile=/etc/allsend/.env
 Restart=always
 RestartSec=10
 
@@ -134,14 +134,14 @@ WantedBy=multi-user.target
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable bridgekit
-sudo systemctl start bridgekit
+sudo systemctl enable allsend
+sudo systemctl start allsend
 ```
 
 ### Step 5: Check Status
 
 ```bash
-sudo systemctl status bridgekit
+sudo systemctl status allsend
 curl http://localhost:3000/health
 ```
 
@@ -218,7 +218,7 @@ For production, use a reverse proxy:
 ```nginx
 server {
     listen 80;
-    server_name bridgekit.yourdomain.com;
+    server_name allsend.yourdomain.com;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -239,7 +239,7 @@ Use Let's Encrypt for free SSL:
 
 ```bash
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d bridgekit.yourdomain.com
+sudo certbot --nginx -d allsend.yourdomain.com
 ```
 
 ---
@@ -273,7 +273,7 @@ Response:
 docker-compose logs -f server
 
 # Systemd logs
-sudo journalctl -u bridgekit -f
+sudo journalctl -u allsend -f
 ```
 
 ---

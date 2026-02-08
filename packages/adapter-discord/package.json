@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/adapter-discord",
+    "name": "@allsend/adapter-discord",
     "version": "0.1.0",
-    "description": "Discord adapter for BridgeKit multi-channel hub",
+    "description": "Discord adapter for Allsend multi-channel hub",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,7 +18,7 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
-        "@bridgekit/core": "workspace:*",
+        "@allsend/core": "workspace:*",
         "discord.js": "^14.14.1"
     },
     "devDependencies": {

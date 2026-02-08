@@ -21,12 +21,12 @@ const bot = new Bot(token);
 
 // Handle /start command
 bot.command('start', (ctx) => {
-    ctx.reply('👋 Hello! I am your BridgeKit bot.\n\nTry these commands:\n• /help\n• /ping\n• /echo <text>');
+    ctx.reply('👋 Hello! I am your Allsend bot.\n\nTry these commands:\n• /help\n• /ping\n• /echo <text>');
 });
 
 // Handle /help command
 bot.command('help', (ctx) => {
-    ctx.reply(`🤖 BridgeKit Bot
+    ctx.reply(`🤖 Allsend Bot
 
 Available commands:
 • /start - Start the bot
@@ -34,7 +34,7 @@ Available commands:
 • /ping - Check if the bot is alive
 • /echo <text> - Echo your message back
 
-Powered by BridgeKit 🚀`);
+Powered by Allsend 🚀`);
 });
 
 // Handle /ping command

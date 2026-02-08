@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/convex",
+    "name": "@allsend/convex",
     "version": "0.1.0",
-    "description": "Convex backend for BridgeKit multi-channel hub",
+    "description": "Convex backend for Allsend multi-channel hub",
     "type": "module",
     "scripts": {
         "dev": "convex dev",

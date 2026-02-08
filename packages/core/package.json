@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/core",
+    "name": "@allsend/core",
     "version": "0.1.0",
-    "description": "Core types and base adapter for BridgeKit multi-channel hub",
+    "description": "Core types and base adapter for Allsend multi-channel hub",
     "type": "module",
     "main": "./src/index.ts",
     "types": "./src/index.ts",

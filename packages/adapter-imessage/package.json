@@ -1,7 +1,7 @@
 {
-    "name": "@bridgekit/adapter-imessage",
+    "name": "@allsend/adapter-imessage",
     "version": "0.1.0",
-    "description": "iMessage adapter for BridgeKit via BlueBubbles",
+    "description": "iMessage adapter for Allsend via BlueBubbles",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,7 +18,7 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
-        "@bridgekit/core": "workspace:*"
+        "@allsend/core": "workspace:*"
     },
     "devDependencies": {
         "@types/bun": "latest",

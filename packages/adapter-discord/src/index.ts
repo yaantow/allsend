@@ -1,5 +1,5 @@
 /**
- * BridgeKit Discord Adapter
+ * Allsend Discord Adapter
  * 
  * Integrates with Discord Gateway using discord.js.
  * Supports text channels, DMs, threads, and reactions.
@@ -25,7 +25,7 @@ import {
     type SendMessageOptions,
     type SendResult,
     type Conversation,
-} from '@bridgekit/core';
+} from '@allsend/core';
 
 /**
  * Discord-specific configuration
@@ -41,7 +41,7 @@ export interface DiscordConfig extends ChannelConfig {
 }
 
 /**
- * Discord adapter for BridgeKit
+ * Discord adapter for Allsend
  * 
  * @example
  * ```typescript

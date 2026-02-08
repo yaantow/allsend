@@ -1,4 +1,4 @@
-# BridgeKit
+# Allsend
 
 > Open-source, self-hostable multi-channel communication hub for AI projects
 
@@ -6,9 +6,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-1.0-orange.svg)](https://bun.sh/)
 
-## What is BridgeKit?
+## What is allsend?
 
-BridgeKit provides a **unified API** for communicating across multiple messaging platforms. Instead of building custom integrations for each platform, use BridgeKit's normalized message protocol and pluggable adapters.
+Allsend provides a **unified API** for communicating across multiple messaging platforms. Instead of building custom integrations for each platform, use Allsend's normalized message protocol and pluggable adapters.
 
 ### ✨ Features
 
@@ -39,8 +39,8 @@ BridgeKit provides a **unified API** for communicating across multiple messaging
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/yaantow/allsend.git
+cd allsend
 
 # Install dependencies
 bun install
@@ -77,8 +77,8 @@ bun run dev:dashboard
 ### Basic Example
 
 ```typescript
-import { createHub } from '@bridgekit/core';
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
+import { createHub } from '@allsend/core';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
 
 // Create the hub
 const hub = createHub();
@@ -100,7 +100,7 @@ hub.on('message', (message) => {
   
   // Reply back
   if (message.content.type === 'text' && message.content.text === '/hello') {
-    hub.reply(message, { type: 'text', text: 'Hello from BridgeKit! �' });
+    hub.reply(message, { type: 'text', text: 'Hello from Allsend! 🚀' });
   }
 });
 
@@ -111,9 +111,9 @@ await hub.start();
 ### Multi-Channel Setup
 
 ```typescript
-import { createHub } from '@bridgekit/core';
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
-import { DiscordAdapter } from '@bridgekit/adapter-discord';
+import { createHub } from '@allsend/core';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
+import { DiscordAdapter } from '@allsend/adapter-discord';
 
 const hub = createHub();
 
@@ -154,7 +154,7 @@ await hub.start();
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│           BridgeKit Unified API             │
+│           Allsend Unified API               │
 │  ┌─────────────────────────────────────┐   │
 │  │     Normalized Message Protocol      │   │
 │  └─────────────────────────────────────┘   │
@@ -169,7 +169,7 @@ await hub.start();
 ## Project Structure
 
 ```
-bridgekit/
+allsend/
 ├── packages/
 │   ├── core/                 # Unified protocol & ChannelHub
 │   ├── adapter-telegram/     # Telegram Bot API adapter
@@ -307,7 +307,7 @@ bun test
 
 ## License
 
-MIT © BridgeKit Contributors
+MIT © Allsend Contributors
 
 ---
 

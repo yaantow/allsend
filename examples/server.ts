@@ -1,14 +1,14 @@
 /**
- * Allsend API Server
+ * allsend Example Server with Convex Integration
  * 
- * Production API server for Allsend with Convex integration.
- * Provides HTTP endpoints for sending messages and monitoring channel status.
+ * A simple example showing how to set up allsend with multiple channels
+ * and sync data to Convex for the dashboard.
  */
 
 import { ChannelHub, createHub } from '@allsend/core';
 import { TelegramAdapter } from '@allsend/adapter-telegram';
 import { ConvexHttpClient } from 'convex/browser';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../convex/_generated/api';
 
 // Initialize Convex client
 const convexUrl = process.env.CONVEX_URL;
@@ -159,7 +159,7 @@ hub.on('message', async (message) => {
     if (message.content.type === 'text' && message.content.text === '/help') {
         hub.reply(message, {
             type: 'text',
-            text: `🤖 Allsend Bot
+            text: `🤖 allsend Bot
 
 Available commands:
 • /echo <text> - Echo your message back
@@ -193,7 +193,7 @@ hub.on('event', async (event) => {
     }
 });
 
-// HTTP server for API endpoints
+// Simple HTTP server for health checks and sending messages from dashboard
 const server = Bun.serve({
     port: 3000,
     async fetch(req) {
@@ -304,14 +304,14 @@ const server = Bun.serve({
         }
 
         if (url.pathname === '/') {
-            return new Response('Allsend API Server' + (convex ? ' (Convex connected)' : ''));
+            return new Response('allsend Server Running' + (convex ? ' (Convex connected)' : ''));
         }
 
         return new Response('Not Found', { status: 404 });
     },
 });
 
-console.log(`🚀 Allsend API server running on http://localhost:${server.port}`);
+console.log(`🚀 allsend server running on http://localhost:${server.port}`);
 
 // Start all adapters
 hub.start().then(() => {

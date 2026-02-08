@@ -120,7 +120,7 @@ export const send = mutation({
             channelType: args.channelType,
             platformMessageId: args.platformMessageId,
             senderId: 'system',
-            senderName: 'BridgeKit',
+            senderName: 'Allsend',
             contentType: args.contentType as any,
             content: args.content,
             isOutgoing: true,

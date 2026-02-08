@@ -25,7 +25,7 @@ export default function App() {
                 <div className="sidebar-header">
                     <div className="sidebar-logo">
                         <Zap size={24} />
-                        <span>BridgeKit</span>
+                        <span>Allsend</span>
                     </div>
                 </div>
 

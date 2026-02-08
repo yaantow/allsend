@@ -9,13 +9,13 @@ const docSections = [
         id: 'getting-started',
         title: 'Getting Started',
         icon: Book,
-        description: 'Learn how to set up BridgeKit and create your first bot',
+        description: 'Learn how to set up Allsend and create your first bot',
     },
     {
         id: 'self-hosting',
         title: 'Self-Hosting',
         icon: Server,
-        description: 'Deploy BridgeKit on your own infrastructure',
+        description: 'Deploy Allsend on your own infrastructure',
     },
     {
         id: 'adapters',
@@ -33,9 +33,9 @@ const docSections = [
 
 // Store the markdown content for each section
 const markdownContent: Record<string, string> = {
-    'getting-started': `# Getting Started with BridgeKit
+    'getting-started': `# Getting Started with Allsend
 
-Learn how to set up BridgeKit and create your first multi-channel bot.
+Learn how to set up Allsend and create your first multi-channel bot.
 
 ## Prerequisites
 
@@ -47,8 +47,8 @@ Learn how to set up BridgeKit and create your first multi-channel bot.
 ### From Source
 
 \`\`\`bash
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/yaantow/allsend.git
+cd allsend
 bun install
 bun run build
 \`\`\`
@@ -64,8 +64,8 @@ bun run build
 ### 2. Create Your Server
 
 \`\`\`typescript
-import { createHub } from '@bridgekit/core';
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
+import { createHub } from '@allsend/core';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
 
 const hub = createHub();
 
@@ -97,16 +97,16 @@ hub.start();
 bun run bot.ts
 \`\`\`
 `,
-    'self-hosting': `# Self-Hosting BridgeKit
+    'self-hosting': `# Self-Hosting Allsend
 
-Deploy BridgeKit on your own infrastructure.
+Deploy Allsend on your own infrastructure.
 
 ## Docker Compose (Recommended)
 
 \`\`\`bash
 # Clone and configure
-git clone https://github.com/your-org/bridgekit.git
-cd bridgekit
+git clone https://github.com/yaantow/allsend.git
+cd allsend
 cp .env.example .env
 
 # Start services
@@ -137,7 +137,7 @@ CONVEX_URL=https://your-project.convex.cloud
 
 ## Cloud Deployment
 
-BridgeKit can be deployed to:
+Allsend can be deployed to:
 - Railway
 - Render
 - Fly.io
@@ -148,7 +148,7 @@ BridgeKit can be deployed to:
 ## Telegram Adapter
 
 \`\`\`typescript
-import { TelegramAdapter } from '@bridgekit/adapter-telegram';
+import { TelegramAdapter } from '@allsend/adapter-telegram';
 
 const telegram = new TelegramAdapter({
   id: 'telegram-main',
@@ -171,7 +171,7 @@ const telegram = new TelegramAdapter({
 ## Discord Adapter
 
 \`\`\`typescript
-import { DiscordAdapter } from '@bridgekit/adapter-discord';
+import { DiscordAdapter } from '@allsend/adapter-discord';
 
 const discord = new DiscordAdapter({
   id: 'discord-main',
@@ -187,7 +187,7 @@ const discord = new DiscordAdapter({
 ## WhatsApp Adapter
 
 \`\`\`typescript
-import { WhatsAppAdapter } from '@bridgekit/adapter-whatsapp';
+import { WhatsAppAdapter } from '@allsend/adapter-whatsapp';
 
 const whatsapp = new WhatsAppAdapter({
   id: 'whatsapp-main',
@@ -203,7 +203,7 @@ const whatsapp = new WhatsAppAdapter({
 Requires BlueBubbles on macOS.
 
 \`\`\`typescript
-import { iMessageAdapter } from '@bridgekit/adapter-imessage';
+import { iMessageAdapter } from '@allsend/adapter-imessage';
 
 const imessage = new iMessageAdapter({
   id: 'imessage-main',
@@ -261,7 +261,7 @@ export default function Docs() {
                 <div className="page-title">
                     <h1>Documentation</h1>
                     <p className="page-description">
-                        Learn how to use BridgeKit, self-host, and integrate adapters
+                        Learn how to use Allsend, self-host, and integrate adapters
                     </p>
                 </div>
             </header>

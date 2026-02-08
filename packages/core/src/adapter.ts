@@ -1,5 +1,5 @@
 /**
- * BridgeKit Base Adapter
+ * Allsend Base Adapter
  * 
  * Abstract base class that all platform adapters must extend.
  * Provides the contract for message sending/receiving and lifecycle management.
